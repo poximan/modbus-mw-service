@@ -1,5 +1,4 @@
 import time
-from datetime import datetime
 from src.persistencia.dao.dao_historicos import historicos_dao as dao
 from src.persistencia.dao.dao_grd import grd_dao
 from .modbus_driver import ModbusTcpDriver
@@ -76,7 +75,7 @@ class GrdMiddlewareClient:
             last_down = item.get("last_disconnected_timestamp")
             if last_down:
                 try:
-                    parsed = last_down if isinstance(last_down, datetime) else timebox.parse(last_down, legacy=True)
+                    parsed = timebox.parse(last_down, legacy=True)
                     ultima_caida = timebox.utc_iso(parsed)
                 except Exception:
                     ultima_caida = str(last_down)
