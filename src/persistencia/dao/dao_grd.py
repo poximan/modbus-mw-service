@@ -63,10 +63,11 @@ class GrdDAO:
                 if conn:
                     conn.close()
 
-    def get_all_grds_with_descriptions(self) -> dict:
+    def get_all_grds_with_descriptions(self, only_active: bool = False) -> dict:
         """
         Recupera todos los GRD IDs y sus descripciones de la tabla 'grd',
         excluyendo aquellos cuya descripcion sea 'reserva'.
+        Si only_active es True, solo retorna los que tienen flag activo=1.
         Retorna un diccionario en formato {grd_id: descripcion}.
         """
         conn = None
@@ -75,7 +76,12 @@ class GrdDAO:
             try:
                 conn = get_db_connection()
                 cursor = conn.cursor()
-                cursor.execute("SELECT id, descripcion FROM grd WHERE descripcion <> 'reserva' ORDER BY id ASC;")
+                query = "SELECT id, descripcion FROM grd WHERE descripcion <> 'reserva'"
+                params = []
+                if only_active:
+                    query += " AND activo = 1"
+                query += " ORDER BY id ASC;"
+                cursor.execute(query, params)
                 rows = cursor.fetchall()
                 for row in rows:
                     grds_data[row['id']] = row['descripcion']

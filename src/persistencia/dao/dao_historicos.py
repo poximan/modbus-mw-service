@@ -88,7 +88,8 @@ class HistoricosDAO:
                         AND h.timestamp = latest_records.max_timestamp
                     INNER JOIN grd g ON h.id_grd = g.id
                     WHERE g.descripcion <> 'reserva'
-                        AND g.descripcion <> 'SE - CD45 Murchison';
+                        AND g.descripcion <> 'SE - CD45 Murchison'
+                        AND g.activo = 1;
                 """)
                 
                 rows = cursor.fetchall()
@@ -140,7 +141,7 @@ class HistoricosDAO:
                     INNER JOIN
                         grd g ON h.id_grd = g.id
                     WHERE
-                        h.conectado = 0 AND g.descripcion <> 'reserva'
+                        h.conectado = 0 AND g.descripcion <> 'reserva' AND g.activo = 1
                     ORDER BY
                         h.id_grd ASC;
                 """)

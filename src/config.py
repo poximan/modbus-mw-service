@@ -20,7 +20,7 @@ GRD_DESCRIPTIONS: dict[int, str] = {
     2: "SS - pluvial prefectura",
     3: "SS - presuriz agro",
     4: "SE - CD45 Murchison",
-    5: "SS - bypass EE4",
+    5: "reserva",
     6: "SS - pluvial lugones",
     7: "reserva",
     8: "SE - et doradillo",

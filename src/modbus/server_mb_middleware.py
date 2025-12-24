@@ -38,7 +38,7 @@ class GrdMiddlewareClient:
     def _refresh_grd_data(self):
         """Refresca la lista de GRDs activos desde la base de datos."""
         if time.time() - self._last_grd_data_refresh > 2000:
-            self._active_grd_data = grd_dao.get_all_grds_with_descriptions()
+            self._active_grd_data = grd_dao.get_all_grds_with_descriptions(only_active=True)
             self._last_grd_data_refresh = time.time()
             if not self._active_grd_data:
                 self.logger.log(

@@ -26,7 +26,8 @@ def create_database_schema():
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS grd (
                     id INTEGER PRIMARY KEY,
-                    descripcion TEXT
+                    descripcion TEXT,
+                    activo INTEGER NOT NULL DEFAULT 1
                 )
             """)
             print("Tabla 'grd' asegurada.")
